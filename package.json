@@ -10,6 +10,11 @@
         "start": "node --watch --env-file=.env scripts/start.mjs"
     },
     "dependencies": {
+        "@grammyjs/stateless-question": "^4.0.0",
+        "@roziscoding/grammy-autoquote": "^2.0.8",
         "grammy": "^1.17.1"
+    },
+    "devDependencies": {
+        "prettier": "^3.5.3"
     }
 }
