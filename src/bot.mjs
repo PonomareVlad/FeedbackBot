@@ -1,17 +1,15 @@
 import { Bot } from 'grammy'
 
 export const {
-
-    // Telegram bot token from t.me/BotFather
+    TELEGRAM_CHAT_ID: id,
     TELEGRAM_BOT_TOKEN: token,
-
-    // Secret token to validate incoming updates
     TELEGRAM_SECRET_TOKEN: secretToken = String(token).split(':').pop(),
-
 } = process.env
 
-// Default grammY bot instance
 export const bot = new Bot(token)
 
-// Sample handler for a simple echo bot
-bot.on('message:text', ctx => ctx.reply(ctx.msg.text))
+const safe = bot.errorBoundary(console.error)
+
+safe.command('start', ctx => ctx.reply('Вы можете отправить произвольное количество сообщений с любым содержанием'))
+
+safe.on('msg', ctx => ctx.forwardMessage(id).then(() => ctx.react('👌')))
